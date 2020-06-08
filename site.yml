@@ -3,14 +3,14 @@
 # ==================
 
 - hosts: all
-  user: ansibler
+  user: ansible
   tasks:
     - name: determine interface
       set_fact: ipv4_address="{{ hostvars[inventory_hostname].ansible_default_ipv4.address }}"
       # eg. to use a eth1: ipv4_address="{{ hostvars[inventory_hostname].ansible_eth1.ipv4.address }}"
 
 - hosts: all
-  user: ansibler
+  user: ansible
   sudo: true
   roles:
     - { role: kernel, when: upgrade_kernel and not ansible_kernel.startswith('3.13') }
@@ -20,20 +20,20 @@
     - { role: oracle_jdk, when: jdk_installed is not defined }
 
 - hosts: 2_links_aggregated
-  user: ansibler
+  user: ansible
   sudo: true
   roles:
     - { role: 2_aggregated_links, when: bond_mode is defined and mtu is defined and ansible_virtualization_role == "host" and ansible_interfaces|length == 3 and "bond0" not in ansible_interfaces }
 
 - hosts: elasticsearch
-  user: ansibler
+  user: ansible
   sudo: true
   roles:
     - elasticsearch
     - elasticsearch_curator
 
 - hosts: monitors[0]
-  user: ansibler
+  user: ansible
   sudo: true
   roles:
     - ganglia_metad
@@ -42,7 +42,7 @@
     - smokeping
 
 - hosts: all
-  user: ansibler
+  user: ansible
   sudo: true
   roles:
     - td_agent
@@ -51,26 +51,26 @@
 # Hadoop
 
 - hosts: zookeepers:journalnodes:resourcemanager:nodemanagers:historyserver:hbase_masters:regionservers
-  user: ansibler
+  user: ansible
   sudo: true
   roles:
     - cdh_common
     - cdh_hadoop_config
 
 - hosts: zookeepers
-  user: ansibler
+  user: ansible
   sudo: true
   roles:
     - cdh_zookeeper_server
 
 - hosts: journalnodes
-  user: ansibler
+  user: ansible
   sudo: true
   roles:
     - cdh_hadoop_journalnode
 
 - hosts: namenodes[0]
-  user: ansibler
+  user: ansible
   sudo: true
   sudo_user: hdfs
   tasks:
@@ -88,14 +88,14 @@
         - hive
 
 - hosts: namenodes[0]
-  user: ansibler
+  user: ansible
   sudo: true
   roles:
     - cdh_hadoop_namenode
     - cdh_hadoop_zkfc
 
 - hosts: namenodes[1]
-  user: ansibler
+  user: ansible
   sudo: true
   sudo_user: hdfs
   tasks:
@@ -119,14 +119,14 @@
         - hive
 
 - hosts: namenodes[1]
-  user: ansibler
+  user: ansible
   sudo: true
   roles:
     - cdh_hadoop_namenode
     - cdh_hadoop_zkfc
 
 - hosts: namenodes[0]
-  user: ansibler
+  user: ansible
   sudo: true
   tasks:
     - name: format hadoop-hdfs-zkfc
@@ -149,25 +149,25 @@
         - hive
 
 - hosts: datanodes
-  user: ansibler
+  user: ansible
   sudo: true
   roles:
     - cdh_hadoop_datanode
 
 - hosts: nodemanagers
-  user: ansibler
+  user: ansible
   sudo: true
   roles:
     - cdh_hadoop_mapreduce
 
 - hosts: hbase_masters:regionservers
-  user: ansibler
+  user: ansible
   sudo: true
   roles:
     - cdh_hbase_config
 
 - hosts: namenodes[0]
-  user: ansibler
+  user: ansible
   sudo: true
   sudo_user: hdfs
   tasks:
@@ -208,38 +208,38 @@
         - hadoop_fs
 
 - hosts: resourcemanager
-  user: ansibler
+  user: ansible
   sudo: true
   roles:
     - cdh_hadoop_yarn_resourcemanager
 
 - hosts: nodemanagers
-  user: ansibler
+  user: ansible
   sudo: true
   roles:
     - cdh_hadoop_yarn_nodemanager
 
 - hosts: historyserver
-  user: ansibler
+  user: ansible
   sudo: true
   roles:
     - cdh_hadoop_mapreduce_historyserver
     - cdh_hadoop_yarn_proxyserver
 
 - hosts: hbase_masters
-  user: ansibler
+  user: ansible
   sudo: true
   roles:
     - cdh_hbase_master
 
 - hosts: regionservers
-  user: ansibler
+  user: ansible
   sudo: true
   roles:
     - cdh_hbase_regionserver
 
 - hosts: hive_metastore
-  user: ansibler
+  user: ansible
   sudo: true
   roles:
     - { role: postgresql_server, when: hive_metastore == "postgresql" }
@@ -249,13 +249,13 @@
     - cdh_hive_config
 
 - hosts: hive_metastore
-  user: ansibler
+  user: ansible
   sudo: true
   roles:
     - cdh_hive_metastore
 
 - hosts: namenodes[0]
-  user: ansibler
+  user: ansible
   sudo: true
   sudo_user: hdfs
   tasks:
@@ -271,13 +271,13 @@
         - hadoop_fs
 
 - hosts: presto_coordinators
-  user: ansibler
+  user: ansible
   sudo: true
   roles:
     - presto_coordinator
 
 - hosts: presto_workers
-  user: ansibler
+  user: ansible
   sudo: true
   roles:
     - presto_worker
