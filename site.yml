@@ -73,7 +73,7 @@
 - hosts: namenodes
   user: ansible
   # sudo: true
-  sudo_user: hdfs
+  # sudo_user: hdfs
   tasks:
     - name: create the /data/dfs/nn directory
       file: path=/data/dfs/nn owner=hdfs group=hdfs state=directory
