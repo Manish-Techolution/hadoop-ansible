@@ -71,7 +71,7 @@
 
 - hosts: namenodes[0]
   user: ansible
-  sudo: true
+  # sudo: true
   sudo_user: hdfs
   tasks:
     - name: create the /data/dfs/nn directory
@@ -89,14 +89,14 @@
 
 - hosts: namenodes[0]
   user: ansible
-  sudo: true
+  # sudo: true
   roles:
     - cdh_hadoop_namenode
     - cdh_hadoop_zkfc
 
 - hosts: namenodes[1]
   user: ansible
-  sudo: true
+  # sudo: true
   sudo_user: hdfs
   tasks:
     - name: wait for the first namenode to come online
@@ -120,14 +120,14 @@
 
 - hosts: namenodes[1]
   user: ansible
-  sudo: true
+  # sudo: true
   roles:
     - cdh_hadoop_namenode
     - cdh_hadoop_zkfc
 
 - hosts: namenodes[0]
   user: ansible
-  sudo: true
+  # sudo: true
   tasks:
     - name: format hadoop-hdfs-zkfc
       shell: creates=/data/dfs/.zkfsformatted hdfs zkfc -formatZK -force && touch /data/dfs/.zkfsformatted
@@ -150,25 +150,25 @@
 
 - hosts: datanodes
   user: ansible
-  sudo: true
+  # sudo: true
   roles:
     - cdh_hadoop_datanode
 
 - hosts: nodemanagers
   user: ansible
-  sudo: true
+  # sudo: true
   roles:
     - cdh_hadoop_mapreduce
 
 - hosts: hbase_masters:regionservers
   user: ansible
-  sudo: true
+  # sudo: true
   roles:
     - cdh_hbase_config
 
 - hosts: namenodes[0]
   user: ansible
-  sudo: true
+  # sudo: true
   sudo_user: hdfs
   tasks:
     - name: create /tmp directory on the cluster
@@ -209,38 +209,38 @@
 
 - hosts: resourcemanager
   user: ansible
-  sudo: true
+  # sudo: true
   roles:
     - cdh_hadoop_yarn_resourcemanager
 
 - hosts: nodemanagers
   user: ansible
-  sudo: true
+  # sudo: true
   roles:
     - cdh_hadoop_yarn_nodemanager
 
 - hosts: historyserver
   user: ansible
-  sudo: true
+  # sudo: true
   roles:
     - cdh_hadoop_mapreduce_historyserver
     - cdh_hadoop_yarn_proxyserver
 
 - hosts: hbase_masters
   user: ansible
-  sudo: true
+  # sudo: true
   roles:
     - cdh_hbase_master
 
 - hosts: regionservers
   user: ansible
-  sudo: true
+  # sudo: true
   roles:
     - cdh_hbase_regionserver
 
 - hosts: hive_metastore
   user: ansible
-  sudo: true
+  # sudo: true
   roles:
     - { role: postgresql_server, when: hive_metastore == "postgresql" }
     - { role: cdh_hive_postgresql_metastore, when: hive_metastore == "postgresql" }
@@ -250,13 +250,13 @@
 
 - hosts: hive_metastore
   user: ansible
-  sudo: true
+  # sudo: true
   roles:
     - cdh_hive_metastore
 
 - hosts: namenodes[0]
   user: ansible
-  sudo: true
+  # sudo: true
   sudo_user: hdfs
   tasks:
     - name: create a /user/hive/warehouse directory on the cluster
@@ -272,12 +272,12 @@
 
 - hosts: presto_coordinators
   user: ansible
-  sudo: true
+  # sudo: true
   roles:
     - presto_coordinator
 
 - hosts: presto_workers
   user: ansible
-  sudo: true
+  # sudo: true
   roles:
     - presto_worker
