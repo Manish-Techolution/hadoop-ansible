@@ -69,7 +69,8 @@
   roles:
     - cdh_hadoop_journalnode
 
-- hosts: namenodes[0]
+# - hosts: namenodes[0]
+- hosts: namenodes
   user: ansible
   # sudo: true
   sudo_user: hdfs
@@ -87,14 +88,16 @@
         - hbase
         - hive
 
-- hosts: namenodes[0]
+# - hosts: namenodes[0]
+- hosts: namenodes
   user: ansible
   # sudo: true
   roles:
     - cdh_hadoop_namenode
     - cdh_hadoop_zkfc
 
-- hosts: namenodes[1]
+# - hosts: namenodes[1]
+- hosts: namenodes
   user: ansible
   # sudo: true
   sudo_user: hdfs
@@ -118,14 +121,16 @@
         - hbase
         - hive
 
-- hosts: namenodes[1]
+# - hosts: namenodes[1]
+- hosts: namenodes
   user: ansible
   # sudo: true
   roles:
     - cdh_hadoop_namenode
     - cdh_hadoop_zkfc
 
-- hosts: namenodes[0]
+# - hosts: namenodes[0]
+- hosts: namenodes
   user: ansible
   # sudo: true
   tasks:
@@ -166,7 +171,8 @@
   roles:
     - cdh_hbase_config
 
-- hosts: namenodes[0]
+# - hosts: namenodes[0]
+- hosts: namenodes
   user: ansible
   # sudo: true
   sudo_user: hdfs
@@ -254,7 +260,8 @@
   roles:
     - cdh_hive_metastore
 
-- hosts: namenodes[0]
+# - hosts: namenodes[0]
+- hosts: namenodes
   user: ansible
   # sudo: true
   sudo_user: hdfs
