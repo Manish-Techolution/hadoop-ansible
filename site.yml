@@ -100,7 +100,7 @@
 - hosts: namenodes
   user: ansible
   # sudo: true
-  sudo_user: hdfs
+  # sudo_user: hdfs
   tasks:
     - name: wait for the first namenode to come online
       wait_for: host={{ hostvars[groups['namenodes'][0]].ipv4_address|default(hostvars[groups['namenodes'][0]].ansible_default_ipv4.address) }} port=50070
@@ -175,7 +175,7 @@
 - hosts: namenodes
   user: ansible
   # sudo: true
-  sudo_user: hdfs
+  # sudo_user: hdfs
   tasks:
     - name: create /tmp directory on the cluster
       shell: creates=/data/dfs/.tmpdircreated hadoop fs -mkdir /tmp && touch /data/dfs/.tmpdircreated
@@ -264,7 +264,7 @@
 - hosts: namenodes
   user: ansible
   # sudo: true
-  sudo_user: hdfs
+  # sudo_user: hdfs
   tasks:
     - name: create a /user/hive/warehouse directory on the cluster
       shell: creates=/data/dfs/.hivewarehousedircreated hadoop fs -mkdir /user/hive/warehouse && touch /data/dfs/.hivewarehousedircreated
