@@ -11,7 +11,7 @@
 
 - hosts: all
   user: ansible
-  sudo: true
+  # sudo: true
   roles:
     - { role: kernel, when: upgrade_kernel and not ansible_kernel.startswith('3.13') }
     - common
@@ -21,20 +21,20 @@
 
 - hosts: 2_links_aggregated
   user: ansible
-  sudo: true
+  # sudo: true
   roles:
     - { role: 2_aggregated_links, when: bond_mode is defined and mtu is defined and ansible_virtualization_role == "host" and ansible_interfaces|length == 3 and "bond0" not in ansible_interfaces }
 
 - hosts: elasticsearch
   user: ansible
-  sudo: true
+  # sudo: true
   roles:
     - elasticsearch
     - elasticsearch_curator
 
 - hosts: monitors[0]
   user: ansible
-  sudo: true
+  # sudo: true
   roles:
     - ganglia_metad
     - ganglia_web
@@ -43,7 +43,7 @@
 
 - hosts: all
   user: ansible
-  sudo: true
+  # sudo: true
   roles:
     - td_agent
     - rsyslog_fluentd
@@ -52,20 +52,20 @@
 
 - hosts: zookeepers:journalnodes:resourcemanager:nodemanagers:historyserver:hbase_masters:regionservers
   user: ansible
-  sudo: true
+  # sudo: true
   roles:
     - cdh_common
     - cdh_hadoop_config
 
 - hosts: zookeepers
   user: ansible
-  sudo: true
+  # sudo: true
   roles:
     - cdh_zookeeper_server
 
 - hosts: journalnodes
   user: ansible
-  sudo: true
+  # sudo: true
   roles:
     - cdh_hadoop_journalnode
 
