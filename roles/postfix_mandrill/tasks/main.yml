@@ -55,7 +55,7 @@
   tags: postfix
 
 - name: forward ansible user email to {{ notify_email }} if not already forwarding
-  sudo: false
+  # sudo: false
   shell: creates=~/.forward chdir=~ echo "{{ notify_email }}" > .forward
   tags: postfix
 
